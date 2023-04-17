@@ -1,0 +1,181 @@
+﻿@page
+@model Employee_Management.Pages.Employees.IndexModel
+@{
+}
+
+<br />
+<h2>List of LoginDetails of Employees</h2>
+<a class='btn btn-primary btn-sm'  href='/Employees/Create'>New Employee</a>
+
+
+@*<button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-bs-target="#createEmployeeModal" data-bs-url="@Url.Page("/Employees/Create")">Register new employee</button>
+<div id="PlaceHolderForModal"></div>*@
+
+
+<table class="table">
+    <thead>
+        <tr>
+           @* <th>Id</th> *@
+            <th>EmployeeNo</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>UserName</th>
+            <th>Password</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.ListEmployees)
+        {
+            <tr>
+                    @*<td>@item.Id</td>*@
+                    <td>@item.EmployeeNo</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Username</td>
+                    <td>@item.Password</td>
+                    <td>
+                      @*  <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-bs-target="#UpdateEmployeeModal">Edit</button>*@
+                           <a class='btn btn-primary btn-sm' href='/Employees/Edit?Id=@item.Id'>Edit</a>
+                           <a class='btn btn-danger btn-sm' href='/Employees/Delete?Id=@item.Id'>Delete</a>
+                    </td>
+            </tr>
+        }     
+    </tbody>
+</table>
+
+
+
+      @* Model to Update Employee *@
+
+<div class="modal fade" id="UpdateEmployeeModal" tabindex="-1" aria-labelledby="UpdateEmployeeModallabel">
+    <div class="modal-dialog">
+        <form method="Post" asp-page-handler="UpdateEmployee">
+            <input type="hidden" asp-for="EmployeeInfo.Id">
+            <input type="hidden" asp-for="EmployeeInfo.EmployeeNo">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="UpdateEmployeeModallabel">Update Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--code between forms is submitted only-->
+                    <div class="mb-3">
+                        <label class="form-label">Name of Employee</label>
+                        <input type="text" class="form-control" asp-for="EmployeeInfo.Name" id="employeenameupdate" required />  
+                    </div>    
+
+                     <div class="mb-3">
+                        <label class="form-label">Email of Employee</label>
+                        <input type="text" class="form-control" asp-for="EmployeeInfo.Email" id="employeeemailupdate" required />
+                    </div> 
+                     <div class="mb-3">
+                        <label class="form-label">UserName of Employee</label>
+                        <input type="text" class="form-control" asp-for="EmployeeInfo.Username" id="employeeusernameupdate" required />
+                    </div> 
+
+                    <div class="mb-3">
+                        <label class="form-label">Password of Employee</label>
+                        <input type="text" class="form-control" asp-for="EmployeeInfo.Password" id="employeepasswordupdate" required />
+                    </div> 
+               </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+
+            </div>
+        </form>     
+  </div>
+</div>
+
+
+
+   @*Model to Delete Employee*@
+
+   <div class="modal fade" id="DeleteEmployeeModal" tabindex="-1" aria-labelledby="DeleteEmployeeModallabel">
+    <div class="modal-dialog">
+        <form method="Post" asp-page-handler="DeleteEmployee">
+            <input type="hidden" asp-for="EmployeeInfo.Id">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DeleteEmployeeModallabel">Delete Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--code between forms is submitted only-->
+                    <div class="mb-3">
+                        <h3>Are you sure you want to delete this employee?</h3>
+                    </div>    
+               </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+
+            </div>
+        </form>     
+  </div>
+</div>
+
+
+@section Scripts
+    {
+       @* <script>
+                var myModalEl = document.getElementById('UpdateEmployeeModal')
+            myModalEl.addEventListener('shown.bs.modal', function (e) 
+           {
+                var Id = $(e.relatedTarget).data('Id');
+                    $('#EmployeeInfo.Id').val(Id); 
+
+                    var EmployeeNo = $(e.relatedTarget).data('EmployeeNo');
+                    $('#EmployeeInfo.EmployeeNo').val(EmployeeNo); 
+
+                    var Name = $(e.relatedTarget).data('Name');
+                   $('#employeenameupdate').val(Name); 
+                   
+                    var Email = $(e.relatedTarget).data('Email');
+                   $('#employeeemailupdate').val(Email);   
+
+                    var UserName = $(e.relatedTarget).data('UserName');
+                   $('#employeeusernameupdate').val(UserName);   
+                   
+                    var Password = $(e.relatedTarget).data('Password');
+                   $('#employeepasswordupdate').val(Password);   
+                          
+          })
+        </script> *@
+
+
+       @* <script>
+                // JavaScript
+                var editButtons = document.querySelectorAll(".btn-primary");
+
+                editButtons.forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        var row = this.closest("tr");
+                        var employeeNo = row.querySelector("td:nth-child(1)").textContent;
+                        var name = row.querySelector("td:nth-child(2)").textContent;
+                        var email = row.querySelector("td:nth-child(3)").textContent;
+                        var username = row.querySelector("td:nth-child(4)").textContent;
+                        var password = row.querySelector("td:nth-child(5)").textContent;
+                        var nameInput = document.querySelector("#employeenameupdate");
+                        var emailInput = document.querySelector("#employeeemailupdate");
+                        var usernameInput = document.querySelector("#employeeusernameupdate");
+                        var passwordInput = document.querySelector("#employeepasswordupdate");
+
+                        var updateModal = new bootstrap.Modal(document.getElementById("UpdateEmployeeModal"));
+                        updateModal.show();
+
+                        nameInput.value = name;
+                        emailInput.value = email;
+                        usernameInput.value = username;
+                        passwordInput.value = password;
+                    });
+                });
+
+        </script>*@
+ }

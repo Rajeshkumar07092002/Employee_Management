@@ -1,0 +1,160 @@
+﻿@page
+@model Employee_Management.Pages.Employees.CreateModel
+
+<br />
+<h2>New Employee</h2>
+
+@if(Model.errorMessage.Length>0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@Model.errorMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="" aria-label="close"></button>
+    </div>
+}
+
+
+
+
+<!-- Button trigger modal -->
+@*<a class='btn btn-primary btn-sm' data-bs-toggle="modal" data-bs-target="#CreateEmployeeModal">Add Employee</a>*@
+
+<!-- Modal -->
+@*<div class="modal fade" id="createEmployeeModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">New Employee</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+ 
+        <form  action=@Url.Page("/Employees/Create")>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">EmployeeNo</label>
+                <div class="col-sm-6">
+                 <input  type="text" class="form-control" name="employeeno" value="@Model.employeeInfo.EmployeeNo"/>
+                </div>
+            </div>
+             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Name</label>
+                <div class="col-sm-6">
+                 <input  type="text" class="form-control" name="name" value="@Model.employeeInfo.Name"/>
+                </div>
+            </div>
+             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-6">
+                 <input  type="text" class="form-control" name="email" value="@Model.employeeInfo.Email"/>
+                </div>
+            </div>
+             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-6">
+                 <input  type="text" class="form-control" name="username" value="@Model.employeeInfo.Username"/>
+                </div>
+            </div>
+            <div  class="row mb-3">
+                <label class="col-sm-3 col-form-label">PasswordStrength</label>
+                <div class="col-sm-6">
+                    <select  class="form-control" name="passwordStrength" >
+                        <option value="0" >options</option>
+                        <option value="1" >Low</option>
+                        <option value="2" >Medium</option>
+                        <option value="3" > High</option>
+                    </select>
+                </div>  
+            </div>
+             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-6">
+                 <input  type="text" class="form-control" name="password" value="@Model.employeeInfo.Password"/>
+                </div>
+            </div>
+
+             @if (Model.successMessage.Length > 0)
+               {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>@Model.successMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="" aria-label="close"></button>
+                </div>
+                }
+                
+        </form>
+
+      </div>
+       <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-save="modal">Save</button>
+       </div>
+      
+       
+    </div>
+  </div>
+</div>*@
+
+
+
+
+
+
+
+<form method="post">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">EmployeeNo</label>
+        <div class="col-sm-6">
+         <input  type="text" class="form-control" name="employeeno" value="@Model.employeeInfo.EmployeeNo"/>
+        </div>
+    </div>
+     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-6">
+         <input  type="text" class="form-control" name="name" value="@Model.employeeInfo.Name"/>
+        </div>
+    </div>
+     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-6">
+         <input  type="text" class="form-control" name="email" value="@Model.employeeInfo.Email"/>
+        </div>
+    </div>
+     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Username</label>
+        <div class="col-sm-6">
+         <input  type="text" class="form-control" name="username" value="@Model.employeeInfo.Username"/>
+        </div>
+    </div>
+    <div  class="row mb-3">
+        <label class="col-sm-3 col-form-label">PasswordStrength</label>
+        <div class="col-sm-6">
+            <select  class="form-control" name="passwordStrength" >
+                <option value="0" >options</option>
+                <option value="1" >Low</option>
+                <option value="2" >Medium</option>
+                <option value="3" > High</option>
+            </select>
+        </div>  
+    </div>
+     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-6">
+         <input  type="text" class="form-control" name="password" value="@Model.employeeInfo.Password"/>
+        </div>
+    </div>
+
+    @if (Model.successMessage.Length > 0)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>@Model.successMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="" aria-label="close"></button>
+        </div>
+    }
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">submit</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a  class="btn btn-outline-primary" href="/Employees/Index" role="button">Cancel</a>
+        </div>
+    </div>
+</form>
